@@ -1,0 +1,4 @@
+node_modules
+.nexmo-app
+*.key
+package-lock.json
