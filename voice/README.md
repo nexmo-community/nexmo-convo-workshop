@@ -16,7 +16,7 @@ $ ngrok http 3000
 
 To interact with the Voice API, we'll need to create a voice application on the Nexmo platform to authenticate our requests. Think of applications more like containers, metadata to group all your data on the Nexmo platform. We'll create one using the CLI, and that needs a name, and answer URL and an event URL. We'll also save a keyfile on disk. Applications work on a public / private key system, so when you create an application, a public key is generated and kept with Nexmo, and a private key is generated, not kept with Nexmo, and returned to you via the creation call. We'll use the private key to authenticate our library calls later on.
 
-Use the ngrok URL you got in the previous step and fill in the command before running it. When Nexmo call is happening on a phone number, the data about the call is sent to the event URL. When you've got an incoming call to a Nexmo number, the system gets your answer URL in order to figure out what to do with the call, how to manage it.
+Use the ngrok URL you got in the previous step and fill in the command before running it. When a call is happening on a Nexmo number, the data about the call is sent to the event URL. When you've got an incoming call to a Nexmo number, the system gets your answer URL in order to figure out what to do with the call, how to manage it.
 
 ```
 $ nexmo app:create "A Voice Application" YOUR_NGROK_URL/webhooks/answer YOUR_NGROK_URL/webhooks/events  --keyfile=private.key
@@ -24,7 +24,7 @@ $ nexmo app:create "A Voice Application" YOUR_NGROK_URL/webhooks/answer YOUR_NGR
 
 ## Buy a Nexmo phone number
 
-In order to interact with the Nexmo Voice API, we'll need a phone number on the Nexmo platform as well. We'll buy one using the CLI, and we're going to buy an Australia number. If you have a phone number from a different country and no roaming plans, buy a number for your country instead, replacing `AU` with your country code.
+In order to interact with the Nexmo Voice API, we'll need a phone number on the Nexmo platform as well. We'll buy one using the CLI, and we're going to buy an Australian number. If you have a phone number from a different country and no roaming plans, buy a number for your country instead, replacing `AU` with your country code.
 
 ```
 $ nexmo number:buy  --country_code AU
@@ -68,7 +68,7 @@ Replace the values in there with your actual API key and secret, the application
 
 ### Make a phone call
 
-In order to make a phone call, we need to call one of the methods from the library. `nexmo.calls.create` takes an object parameter, and passes than on to the API. The `from` property is an array with a single object, of type phone, and the number being the Nexmo number you rented on the platform. `to` is similar, except the number should be the one you're trying to call. I'll use mine here for example. The `ncco` property is what drives the call. It's called a  Nexmo Call Control Object, and it's a json structure with instructions for the call. Here I'm using the talk action, using the voice `Nicole` (the Australian female voice) and making it say the text there. There are more options available for the voiceName, as well as other actions the NCCO accepts. I strongly recommend taking a look at the [NCCO reference](https://developer.nexmo.com/voice/voice-api/ncco-reference) on the Nexmo Developer Platform.
+In order to make a phone call, we need to call one of the methods from the library. `nexmo.calls.create` takes an object parameter, and passes that on to the API. The `from` property is an array with a single object, of type phone, and the number being the Nexmo number you rented on the platform. `to` is similar, except the number should be the one you're trying to call. I'll use mine here for example. The `ncco` property is what drives the call. It's called a  Nexmo Call Control Object, and it's a json structure with instructions for the call. Here I'm using the talk action, using the voice `Nicole` (the Australian female voice) and making it say the text there. There are more options available for the voiceName, as well as other actions the NCCO accepts. I strongly recommend taking a look at the [NCCO reference](https://developer.nexmo.com/voice/voice-api/ncco-reference) on the Nexmo Developer Platform.
 
 ```javascript
 nexmo.calls.create({
@@ -90,7 +90,7 @@ nexmo.calls.create({
 
 ### Run the application
 
-Now that we created our application, the only thing needed to make the call is run the code. So go ahead and run it with node, and you should be getting a call from the Nexmo number.
+Now that we created our application, the only thing needed to make the call is running the code. So go ahead and run it with node, and you should be getting a call from the Nexmo number.
 
 ```
 $ node index.js
@@ -98,13 +98,13 @@ $ node index.js
 
 ## Receive a phone call
 
-While making a phone call needed an API call to the Nexmo platform, using our node library, receiving a phone call doesn't need an API call. Whenever your Nexmo number receives a phone call, the platform goes and gets your answer URL, and then drives the call based on the NCCO found there.
+While making a phone call needs an API call to the Nexmo platform, using our node library, receiving a phone call doesn't need an API call. Whenever your Nexmo number receives a phone call, the platform goes and gets your answer URL, and then drives the call based on the NCCO found there.
 
 Because the Nexmo platform makes the requests to the answer and event URLs, those need to be publicly accessible on the internet, and that's why we're using ngrok. We'll need to create a web server that can respond to a GET request on that answer URL and listen for POST requests on that event URL.
 
 ### Create a web server
 
-We'll be creating our webserver using express because it's one of the most popular and easy to use node frameworks for this. We'll also be looking at the request bodies for the event URL, so we'll need to install body-parser as well as express from npm.
+We'll be creating our webserver using express because it's one of the most popular and easy to use node frameworks for this purpose. We'll also be looking at the request bodies for the event URL, so we'll need to install body-parser as well as express from npm.
 
 ```
 $ npm install express body-parser
