@@ -103,7 +103,7 @@ $ node index.js
 
 ## [Optional] Control Verification request
 
-We were talking at the beginning of this slot about other things you can do with the Verify API. One of those is to trigger the next event in the verification process, for example, the text to speech phone call. By default Nexmo will send an SMS message, then a text to speech phone call, and if that fails, another text to speech phone call.  If you want to define your own workflow or specify your PIN code, you can do so, but you'll need to speak to an account manager.
+We were talking at the beginning of this slot about other things you can do with the Verify API. One of those is to trigger the next event in the verification process, for example, the text to speech phone call. By default Nexmo will send an SMS message, then a text to speech phone call, and if that fails, another text to speech phone call.  If you want to define your own workflow  you can do so with the API. If you want to specify your PIN code, you can do so, but you'll need to speak to an account manager first.
 
 ### Triger next event
 

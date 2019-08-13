@@ -66,6 +66,13 @@ There is another API that deals with sending text messages from Nexmo called the
 $ npm install nexmo@beta
 ```
 
+Because the API is in Beta, we'll need to install the beta version of the Nexmo CLI as well.
+
+```
+$ npm install -g nexmo-cli@beta
+```
+
+
 ### Create a Messages Application
 
 To interact with the Messages API, we'll need to create a messages application on the Nexmo platform to authenticate our requests. Think of applications more like containers, metadata to group all your data on the Nexmo platform. We'll create one using the CLI, and that needs a name, and inbound URL and a status URL. We'll also save a keyfile on disk. Applications work on a public / private key system, so when you create an application, a public key is generated and kept with Nexmo, and a private key is generated, not kept with Nexmo, and returned to you via the creation call. We'll use the private key to authenticate our library calls later on.
